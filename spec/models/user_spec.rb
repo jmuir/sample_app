@@ -21,7 +21,8 @@ describe User do
   it { should respond_to(:email) }
   it { should respond_to(:name) }
   it { should respond_to(:password_digest) }
-  it{ should respond_to(:password_confirmation) }
+  it { should respond_to(:password) }
+  it { should respond_to(:password_confirmation) }
 
   it { should be_valid }
 
@@ -85,6 +86,12 @@ describe User do
 
   describe "when password and confirmation password don't match" do
     before {@user.password_confirmation = "mismatch"}
+
+    it {should_not be_valid}
+  end
+
+  describe "when password confirmation is nil" do
+    before {@user.password_confirmation = nil}
 
     it {should_not be_valid}
   end
